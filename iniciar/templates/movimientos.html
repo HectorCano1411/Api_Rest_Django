@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}TRANSACCIONES{% endblock %}
+
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="text-center">Transacciones Realizadas</h2>
+    <p class="text-center">Bienvenido(a ), {{ usuario.Nombres }} {{ usuario.Apellidos }}.</p>
+
+    <!-- Tabla de transacciones -->
+    <table class="table table-bordered table-hover mx-auto">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Monto</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Cuenta de Origen</th>
+          <th scope="col">Cuenta de Destino</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for transaccion in transacciones %}
+          <tr>
+            <td>{{ transaccion.monto }}</td>
+            <td>{{ transaccion.fecha }}</td>
+            <td>{{ transaccion.cuenta_origen }}</td>
+            <td>{{ transaccion.cuenta_destino }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="text-center mt-3">
+      <a href="{% url 'detalle_cuenta' usuario_id=usuario.id %}" class="btn btn-primary">Volver a Detalle de Cuenta</a>
+    </div>
+  </div>
+{% endblock %}
+</body>
+</html>

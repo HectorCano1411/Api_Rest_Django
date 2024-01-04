@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transferencia Ya Aprobada</title>
+</head>
+<body>
+    <h2>Transferencia Ya Aprobada</h2>
+    <p>La transferencia con ID {{ transferencia.id }} ya ha sido aprobada anteriormente.</p>
+    <p><a href="{% url 'detalles_transferencia' transferencia.id %}">Ver Detalles de la Transferencia</a></p>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!-- transferencias/templates/transferencias/historial_saldo.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Saldo</title>
+</head>
+<body>
+
+<h2>Historial de Saldo</h2>
+
+<!-- Agrega opciones de filtro dinámico si es necesario -->
+
+<table>
+    <thead>
+        <tr>
+            <th>Transferencia</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transferencia in historial %}
+            <tr>
+                <td>{{ transferencia }}</td>
+                <td>${{ transferencia.monto }}</td>
+                <td>{{ transferencia.fecha }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

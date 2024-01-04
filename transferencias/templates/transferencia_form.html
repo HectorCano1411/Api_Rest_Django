@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Login - Banco en Línea{% endblock %}
+<!-- transferencias/templates/transferencia_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Transferencia</title>
+
+    <!-- Agrega los estilos de Bootstrap (Puedes cambiar la versión del CDN si lo necesitas) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Realizar Transferencia</h2>
+        <p>Usuario: {{ request.user.username }}</p>
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            {% if form.non_field_errors %}
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+            {% if 'cuenta_origen' in form.errors or 'cuenta_destino' in form.errors %}
+                <div class="text-danger">
+                    Saldo insuficiente en la cuenta de origen.
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td>{{ form.cuenta_origen.label_tag }}</td>
+                        <td>
+                            {{ form.cuenta_origen }}
+                            {% if form.cuenta_origen.errors %}
+                                <div class="text-danger">
+                                    {{ form.cuenta_origen.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>{{ form.cuenta_destino.label_tag }}</td>
+                        <td>
+                            {{ form.cuenta_destino }}
+                            {% if form.cuenta_destino.errors %}
+                                <div class="text-danger">
+                                    {{ form.cuenta_destino.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.monto.label_tag }}</td>
+                        <td>
+                            {{ form.monto }}
+                            {% if form.monto.errors %}
+                                <div class="text-danger">
+                                    {{ form.monto.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>{{ form.aprobada.label_tag }}</td>
+                        <td>
+                            {{ form.aprobada }}
+                            {% if form.aprobada.errors %}
+                                <div class="text-danger">
+                                    {{ form.aprobada.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.referencia.label_tag }}</td>
+                        <td>
+                            {{ form.referencia }}
+                            {% if form.referencia.errors %}
+                                <div class="text-danger">
+                                    {{ form.referencia.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>{{ form.detalles.label_tag }}</td>
+                        <td>
+                            {{ form.detalles }}
+                            {% if form.detalles.errors %}
+                                <div class="text-danger">
+                                    {{ form.detalles.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.tasa_interes.label_tag }}</td>
+                        <td>
+                            {{ form.tasa_interes }}
+                            {% if form.tasa_interes.errors %}
+                                <div class="text-danger">
+                                    {{ form.tasa_interes.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>{{ form.descripcion.label_tag }}</td>
+                        <td>
+                            {{ form.descripcion }}
+                            {% if form.descripcion.errors %}
+                                <div class="text-danger">
+                                    {{ form.descripcion.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <button type="submit" class="btn btn-primary">Realizar Transferencia</button>
+            <a href="{% url 'custom_logout' %}" class="btn btn-danger">Salir</a>
+        </form>
+    </div>
+    
+{% endblock %}
+
+<!-- Agrega los scripts de Bootstrap (opcional, pero puede ser necesario para ciertos componentes) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

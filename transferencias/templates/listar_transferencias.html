@@ -1,0 +1,20 @@
+<!-- transferencias/templates/transferencias/listar_transferencias.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Transferencias</title>
+</head>
+<body>
+
+<h2>Listar Transferencias</h2>
+
+<ul>
+    {% for transferencia in transferencias %}
+        <li><a href="{% url 'detalles_transferencia' transferencia.id %}">{{ transferencia }}</a></li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
